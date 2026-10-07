@@ -12,8 +12,5 @@
 *.synctex.gz
 *.pdf
 
-# Overleaf Workshop local-replica metadata (machine-specific)
-.overleaf/
-
 # Upload bundles
 *.zip
