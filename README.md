@@ -17,6 +17,16 @@ From the repository root (use `mvnw.cmd` instead of `./mvnw` on Windows):
 | Start a server (players, bots) | `java -jar target/exploding-kittens.jar 2 0` |
 | Start a client (server IP) | `java -jar target/exploding-kittens.jar 127.0.0.1` |
 
+### Tests of the original code (Question 1)
+
+```
+./mvnw -f legacy/pom.xml test
+```
+
+Several of these tests are **expected to fail**: each failure shows a requirement the original code does not fulfil
+(see the comments in `legacy/src/test/java/ExplodingKittensLegacyTest.java`). The build still ends green so the summary is readable;
+add `-Dmaven.test.failure.ignore=false` to make failures fatal. They are not run by the root `./mvnw test`.
+
 Start the server first. It waits for the online clients before the game starts.
 Test reports are written to `target/surefire-reports/`.
 
@@ -26,7 +36,7 @@ Test reports are written to `target/surefire-reports/`.
 
 ```
 pom.xml                  Maven build (Java 17, JUnit 5)
-legacy/ExplodingKittens.java   the original code, kept unchanged for Question 1 (not built)
+legacy/                  the original code (unchanged) and its tests, a separate Maven module for Question 1
 src/main/java/kittens/
   Main.java              entry point
   core/                  game engine: setup, turns, rules (no I/O)
