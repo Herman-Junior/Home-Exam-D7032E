@@ -36,7 +36,6 @@ src/main/java/kittens/
   net/                   network transport, independent of the rules
   ui/                    menu and console presentation
 src/test/java/kittens/   JUnit tests
-report/                  LaTeX source of the written answers
 ```
 
 The package split is a starting point for the design in Question 2 and may change.

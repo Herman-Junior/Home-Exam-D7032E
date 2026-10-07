@@ -14,18 +14,6 @@ target/
 .DS_Store
 Thumbs.db
 
-# LaTeX build output (report/)
-*.aux
-*.bbl
-*.blg
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.toc
-*.synctex.gz
-report/*.pdf
-
 # Hand-in bundles
 *.zip
 *.tar.gz
