@@ -1,0 +1,38 @@
+\section{Unit Testing of the Original Code}
+\label{sec:unit-testing}
+
+\subsection{Requirements Compliance}
+\todo{Go through each requirement in the exam specification and state whether
+the original code fulfils it. Refer to line numbers in
+\code{ExplodingKittens.java}.}
+
+\begin{longtable}{@{}p{1.2cm}p{6.5cm}p{1.8cm}p{5cm}@{}}
+\toprule
+\textbf{Req.} & \textbf{Description} & \textbf{Fulfilled?} & \textbf{Comment / line ref.} \\
+\midrule
+\endhead
+\req{1} & \todo{e.g. 2--5 players, mix of bots and online players} & \todo{Yes/No/Partly} & \todo{} \\
+\req{2} & \todo{e.g. deck composition depends on number of players} & \todo{} & \todo{} \\
+\req{3} & \todo{} & \todo{} & \todo{} \\
+\req{4} & \todo{} & \todo{} & \todo{} \\
+\req{5} & \todo{} & \todo{} & \todo{} \\
+\bottomrule
+\caption{Requirements compliance of the original implementation.}
+\label{tab:req-compliance}
+\end{longtable}
+
+\subsection{Testability of the Original Code}
+\todo{Explain why the code is hard to unit test: everything in one class,
+static mutable state (\code{deck}, \code{discard},
+\code{numberOfTurnsToTake}), I/O mixed with game logic, \code{System.exit},
+hard-coded \code{Random}, threads/timeouts, no dependency injection.}
+
+\subsection{Identified Bugs}
+\todo{List defects found while analysing/testing, e.g.:}
+\begin{itemize}
+  \item \todo{Two-of-a-kind uses \code{rnd.nextInt(size-1)} --- last card can never be stolen / crashes on a one-card hand.}
+  \item \todo{Bots never act (no bot logic implemented).}
+  \item \todo{Unvalidated input (target IDs, defuse position, card names) throws exceptions.}
+  \item \todo{Exploded players can be targeted.}
+  \item \todo{\ldots}
+\end{itemize}

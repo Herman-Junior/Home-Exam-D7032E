@@ -1,0 +1,59 @@
+\section{Software Architecture and Design}
+\label{sec:architecture}
+
+\subsection{Design Goals}
+\todo{Derive goals from \cref{sec:quality-attributes}: separate game logic from
+I/O/networking, make cards pluggable, support expansions, enable unit testing.}
+
+\subsection{Architectural Overview}
+\todo{Describe the chosen architectural style(s), e.g. layered / MVC /
+client--server, and the main components.}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=\textwidth]{architecture-overview.png}
+  \fbox{\parbox[c][5cm][c]{0.9\textwidth}{\centering \todo{Component / package diagram}}}
+  \caption{High-level architecture.}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection{Class Diagram}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=\textwidth]{class-diagram.png}
+  \fbox{\parbox[c][7cm][c]{0.9\textwidth}{\centering \todo{UML class diagram}}}
+  \caption{UML class diagram of the refactored design.}
+  \label{fig:class-diagram}
+\end{figure}
+
+\subsection{Design Patterns}
+\todo{For each pattern: problem it solves here, how it is applied, and which
+quality attribute it supports. Candidates:}
+\begin{itemize}
+  \item \textbf{Strategy / Command} -- \todo{card effects as objects instead of an \code{if/else} chain.}
+  \item \textbf{Factory / Abstract Factory} -- \todo{building decks per expansion and player count.}
+  \item \textbf{Observer} -- \todo{broadcasting game events to players / UI.}
+  \item \textbf{State} -- \todo{turn phases, Nope window, attack/streak state.}
+  \item \textbf{Template Method / Decorator} -- \todo{if relevant.}
+\end{itemize}
+
+\subsection{Supporting the Expansions}
+\todo{Show how the design accommodates each expansion without changing
+existing code.}
+\begin{itemize}
+  \item \textbf{Imploding Kittens:} \todo{Imploding Kitten (face up/down), Reverse (play direction), Draw from the Bottom, Feral Cat, Alter the Future, Targeted Attack.}
+  \item \textbf{Streaking Kittens:} \todo{Streaking Kitten, Super Skip, See the Future x5, Alter the Future x5, Swap Top and Bottom, Garbage Collection, Catomic Bomb, Mark, Curse of the Cat Butt.}
+  \item \textbf{Barking Kittens:} \todo{Barking Kitten pair, Tower of Power, Bury, Personal Attack, Share the Future, Potluck, I'll Take That, Super Skip, Alter the Future\ldots}
+\end{itemize}
+
+\subsection{Sequence Diagrams}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=\textwidth]{sequence-play-card.png}
+  \fbox{\parbox[c][5cm][c]{0.9\textwidth}{\centering \todo{Sequence diagram: playing a card with the Nope window}}}
+  \caption{Playing a card that can be Noped.}
+  \label{fig:seq-play-card}
+\end{figure}
+
+\subsection{Design Rationale and Trade-offs}
+\todo{Justify the choices and discuss alternatives that were rejected.}

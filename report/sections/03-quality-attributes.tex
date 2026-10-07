@@ -1,0 +1,37 @@
+\section{Quality Attributes, Requirements and Testability}
+\label{sec:quality-attributes}
+
+\subsection{Modifiability and Extensibility}
+\todo{Assess how hard it is to add new cards and expansions (Imploding,
+Streaking, Barking Kittens) in the current code. Point to the
+\code{if/else} chain over card names and the hard-coded \code{enum Card}.}
+
+\subsection{Testability}
+\todo{Summarise testability issues (can reference \cref{sec:unit-testing}).}
+
+\subsection{Other Quality Attributes}
+\todo{Pick the relevant ones, e.g. maintainability, readability/cohesion,
+coupling, reliability (concurrency in Nope handling), usability of the
+text interface, portability.}
+
+\subsection{Quality Attribute Scenarios}
+\todo{Write concrete scenarios (source, stimulus, artifact, environment,
+response, response measure).}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{Part} & \textbf{Modifiability scenario: add a new expansion} \\
+\midrule
+Source            & \todo{Developer} \\
+Stimulus          & \todo{Wants to add the Streaking Kittens expansion} \\
+Artifact          & \todo{Card and deck modules} \\
+Environment       & \todo{Design time} \\
+Response          & \todo{New cards added without modifying existing game logic} \\
+Response measure  & \todo{Only new classes added; no changes to existing classes} \\
+\bottomrule
+\end{tabularx}
+\caption{Example quality attribute scenario.}
+\label{tab:qas-modifiability}
+\end{table}
