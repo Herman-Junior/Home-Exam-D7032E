@@ -1,0 +1,19 @@
+# LaTeX build output
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.pdf
+
+# Overleaf Workshop local-replica metadata (machine-specific)
+.overleaf/
+
+# Upload bundles
+*.zip
