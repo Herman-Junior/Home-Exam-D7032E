@@ -1,4 +1,4 @@
-package kittens;
+package kittens.app;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

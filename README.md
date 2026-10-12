@@ -38,17 +38,18 @@ Test reports are written to `target/surefire-reports/`.
 pom.xml                  Maven build (Java 17, JUnit 5)
 legacy/                  the original code (unchanged) and its tests, a separate Maven module for Question 1
 src/main/java/kittens/
-  Main.java              entry point
-  core/                  game engine: setup, turns, rules (no I/O)
-  cards/                 card types and effects
-  expansion/             base game and expansion plug-ins
-  player/                human, remote and bot players
-  net/                   network transport, independent of the rules
-  ui/                    menu and console presentation
+  app/                   Main and the game builder (composition root; creates and injects everything)
+  api/                   interfaces and shared types; engine and plug-ins depend on these, not on each other
+  engine/                the rules: setup, turns, Nope window, rule hooks (no I/O, no static state)
+  model/                 plain game data: Card, Deck, Hand, ... (no I/O, no threads)
+  expansion/             base game (always on) and the Imploding, Streaking and Barking expansions
+  player/                bots and the remote player
+  net/                   network transport, independent of the game
+  ui/                    menu, console output and the human player at the keyboard
 src/test/java/kittens/   JUnit tests
 ```
 
-The package split is a starting point for the design in Question 2 and may change.
+The package structure follows the architecture design for Question 2.
 
 ## Hand-in
 

@@ -45,7 +45,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>kittens.Main</mainClass>
+              <mainClass>kittens.app.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

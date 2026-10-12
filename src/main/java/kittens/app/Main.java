@@ -1,4 +1,4 @@
-package kittens;
+package kittens.app;
 
 /**
  * Entry point. Keeps the command line of the original game:

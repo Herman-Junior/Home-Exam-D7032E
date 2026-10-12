@@ -1,5 +1,5 @@
 /**
- * Network transport. Carries typed messages between server and clients and is independent of game rules,
- * so neither side depends on hard-coded keywords in the text.
+ * Network transport: typed messages, connection, server and client.
+ * Knows nothing about the game, so the transport and the rules can change independently.
  */
 package kittens.net;
