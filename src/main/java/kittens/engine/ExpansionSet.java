@@ -2,6 +2,7 @@ package kittens.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import kittens.api.Reaction;
 /** The content of all the expansions in a game, gathered in one place. */
 final class ExpansionSet implements CardCatalog {
 
-    private final Map<CardType, CardDefinition> definitions = new HashMap<>();
+    private final Map<CardType, CardDefinition> definitions = new LinkedHashMap<>();
     private final List<Combo> combos = new ArrayList<>();
     private final List<Reaction> reactions = new ArrayList<>();
 
@@ -45,6 +46,11 @@ final class ExpansionSet implements CardCatalog {
     @Override
     public Optional<CardDefinition> definition(CardType type) {
         return Optional.ofNullable(definitions.get(type));
+    }
+
+    @Override
+    public List<CardType> cardTypes() {
+        return List.copyOf(definitions.keySet());
     }
 
     List<Combo> combos() {

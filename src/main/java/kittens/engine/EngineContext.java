@@ -214,4 +214,9 @@ final class EngineContext implements GameContext {
     public Optional<CardDefinition> definition(CardType type) {
         return content.definition(type);
     }
+
+    @Override
+    public List<CardType> cardTypes() {
+        return content.cardTypes();
+    }
 }

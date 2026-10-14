@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,8 @@ public final class FakeGameContext implements GameContext {
     private final Set<PlayerId> eliminated = new LinkedHashSet<>();
     private final List<GameEvent> announced = new ArrayList<>();
     private final List<Attack> attacks = new ArrayList<>();
-    private final Map<CardType, CardDefinition> definitions = new HashMap<>();
+    private final Map<CardType, CardDefinition> definitions = new LinkedHashMap<>();
+    private final List<Duration> askAllLimits = new ArrayList<>();
     private PlayerId current;
     private int turnsEnded;
     private int shuffles;
@@ -116,6 +118,11 @@ public final class FakeGameContext implements GameContext {
         return Collections.unmodifiableList(new ArrayList<>(attacks));
     }
 
+    /** The time limits of the timed questions that were asked, in order. */
+    public List<Duration> askAllLimits() {
+        return Collections.unmodifiableList(new ArrayList<>(askAllLimits));
+    }
+
     public int turnsEnded() {
         return turnsEnded;
     }
@@ -141,6 +148,7 @@ public final class FakeGameContext implements GameContext {
 
     @Override
     public List<Answer> askAll(Collection<PlayerId> players, Decision decision, Duration limit) {
+        askAllLimits.add(limit);
         List<Answer> answers = new ArrayList<>();
         for (PlayerId player : players) {
             if (ports.containsKey(player)) {
@@ -153,6 +161,11 @@ public final class FakeGameContext implements GameContext {
     @Override
     public Optional<CardDefinition> definition(CardType type) {
         return Optional.ofNullable(definitions.get(type));
+    }
+
+    @Override
+    public List<CardType> cardTypes() {
+        return List.copyOf(definitions.keySet());
     }
 
     @Override
