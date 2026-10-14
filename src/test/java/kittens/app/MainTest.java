@@ -52,6 +52,7 @@ class MainTest {
         assertTrue(usage.contains("Server syntax"));
         assertTrue(usage.contains("Client syntax"));
         assertTrue(usage.contains("local game"));
+        assertTrue(usage.contains("serverIP"));
     }
 
     @Test
@@ -64,13 +65,6 @@ class MainTest {
     void wordsInsteadOfNumbersPrintTheUsage() {
         assertEquals(2, run(new ByteArrayInputStream(new byte[0]), "many", "few"));
         assertTrue(output().contains("Server syntax"));
-    }
-
-    @Test
-    void networkPlayIsNotAvailableYet() {
-        assertEquals(2, run(new ByteArrayInputStream(new byte[0]), "2", "1"));
-        assertTrue(output().contains("not available yet"));
-        assertEquals(2, run(new ByteArrayInputStream(new byte[0]), "127.0.0.1"));
     }
 
     @ParameterizedTest(name = "{0} bots")
