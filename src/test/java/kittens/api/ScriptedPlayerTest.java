@@ -57,4 +57,16 @@ class ScriptedPlayerTest {
         assertEquals(List.of(GameEvent.of("turn-started", "1"), GameEvent.of("card-played", "1", "Skip")),
                 listener.events());
     }
+
+    @Test
+    void canAnswerByDescriptionAndMixStyles() {
+        ScriptedPlayer player = ScriptedPlayer.options("play-card Skip").thenIndex(0);
+        assertEquals(1, player.choose(turn));
+        assertEquals(0, player.choose(turn));
+    }
+
+    @Test
+    void failsWhenTheDescriptionMatchesNoOption() {
+        assertThrows(AssertionError.class, () -> ScriptedPlayer.options("play-card Attack").choose(turn));
+    }
 }
