@@ -121,7 +121,7 @@ class BaseCardsTest {
         assertEquals(List.of(TACO_CAT), context.hand(P0));
         assertEquals(List.of(DEFUSE), context.discardPile());
         assertTrue(context.eliminated().isEmpty());
-        assertEquals(List.of(GameEvent.of("defused", "0")), context.announced());
+        assertEquals(List.of(GameEvent.of("kitten-drawn", "0"), GameEvent.of("defused", "0")), context.announced());
     }
 
     @Test

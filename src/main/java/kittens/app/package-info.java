@@ -1,6 +1,6 @@
 /**
  * Composition root: {@code Main} and the game builder.
- * Parses the command line, creates the concrete objects and injects them into each other.
+ * Parses the command line, creates the concrete objects (players, expansions) and injects them into the engine.
  * This is the only package that names concrete classes from all the others.
  */
 package kittens.app;

@@ -1,5 +1,5 @@
 /**
- * Presentation: the menu for choosing expansions and variants, console output of game events, and the human player
- * at the keyboard (ConsolePlayer). The client program reuses the console code to show and answer remote prompts.
+ * Presentation: the human player at the keyboard ({@code ConsolePlayer}), which shows decisions and events as text.
+ * It depends on {@code api} only. The menu for choosing expansions and variants will be added here.
  */
 package kittens.ui;

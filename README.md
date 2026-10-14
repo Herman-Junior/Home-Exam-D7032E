@@ -14,8 +14,7 @@ From the repository root (use `mvnw.cmd` instead of `./mvnw` on Windows):
 |------|---------|
 | Run all unit tests (JUnit 5, prints pass/fail per test) | `./mvnw test` |
 | Build the runnable jar (also runs the tests) | `./mvnw package` |
-| Start a server (players, bots) | `java -jar target/exploding-kittens.jar 2 0` |
-| Start a client (server IP) | `java -jar target/exploding-kittens.jar 127.0.0.1` |
+| Play a local game against 1 to 4 computer players | `java -jar target/exploding-kittens.jar 1 2` (the first number is the number of humans, always 1 for now; the second is the number of bots) |
 
 ### Tests of the original code (Question 1)
 
@@ -27,10 +26,15 @@ Several of these tests are **expected to fail**: each failure shows a requiremen
 (see the comments in `legacy/src/test/java/ExplodingKittensLegacyTest.java`). The build still ends green so the summary is readable;
 add `-Dmaven.test.failure.ignore=false` to make failures fatal. They are not run by the root `./mvnw test`.
 
-Start the server first. It waits for the online clients before the game starts.
 Test reports are written to `target/surefire-reports/`.
 
-> The game logic is not implemented yet: `Main` currently only prints the usage text.
+### Playing
+
+Run `./mvnw package` first, which builds `target/exploding-kittens.jar`. The game is played in the console. Each question is
+a numbered list: type the number and press Enter. When another player plays a card and you hold a Nope, you get a few seconds
+to answer the Nope question. The base game (requirements 1 to 13) is playable against computer players. The expansions, playing
+over the network and the menu are not built yet, so a game with more than one human (the original `server` and `client`
+arguments) is refused with a message.
 
 ## Layout
 
@@ -42,10 +46,10 @@ src/main/java/kittens/
   api/                   interfaces and shared types; engine and plug-ins depend on these, not on each other
   engine/                the rules: setup, turns, Nope window, rule hooks (no I/O, no static state)
   model/                 plain game data: Card, Deck, Hand, ... (no I/O, no threads)
-  expansion/             base game (always on) and the Imploding, Streaking and Barking expansions
-  player/                bots and the remote player
+  expansion/base/        the base game as an expansion (always on); Imploding, Streaking and Barking are not written yet
+  player/                computer players (RandomBot); the remote player will be added
   net/                   network transport, independent of the game
-  ui/                    menu, console output and the human player at the keyboard
+  ui/                    the human player at the console (ConsolePlayer); the menu will be added
 src/test/java/kittens/   JUnit tests
 ```
 

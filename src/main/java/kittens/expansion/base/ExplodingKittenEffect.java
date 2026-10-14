@@ -20,6 +20,7 @@ final class ExplodingKittenEffect implements DrawEffect {
 
     @Override
     public void onDrawn(GameContext context, PlayerId player, CardType kitten) {
+        context.announce(GameEvent.of("kitten-drawn", player.toString()));
         if (context.hand(player).contains(BaseCards.DEFUSE)) {
             context.discard(player, BaseCards.DEFUSE);
             List<Option> positions = new ArrayList<>();

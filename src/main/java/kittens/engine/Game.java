@@ -211,6 +211,7 @@ public final class Game {
         } else {
             state.player(player).hand().add(card);
             channel.tell(player, GameEvent.of("card-drawn", card.id()));
+            channel.announce(GameEvent.of("player-drew", player.toString()));
         }
         if (!context.turnOver()) {
             context.endTurn();
