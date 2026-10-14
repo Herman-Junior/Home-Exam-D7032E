@@ -1,5 +1,9 @@
 package kittens.api;
 
+import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
+
 /** Talking to the players: asking for decisions and reporting what happens. */
 public interface Messenger {
 
@@ -8,6 +12,14 @@ public interface Messenger {
      * {@link Decision#options()}.
      */
     int ask(PlayerId player, Decision decision);
+
+    /**
+     * Asks all the given players at the same time and returns the answers that arrive within {@code limit}, in the
+     * order they arrive. It returns early once every player has answered. A player who does not answer in time is
+     * simply missing from the result. This is how timed moments such as the Nope window are built; all the waiting
+     * and the threads stay inside the engine.
+     */
+    List<Answer> askAll(Collection<PlayerId> players, Decision decision, Duration limit);
 
     /** Tells everyone about an event. */
     void announce(GameEvent event);

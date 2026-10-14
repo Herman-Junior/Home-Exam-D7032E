@@ -8,6 +8,8 @@
  * Content: an {@link kittens.api.Expansion} supplies {@link kittens.api.CardDefinition}s whose
  * {@link kittens.api.CardEffect}s and {@link kittens.api.DrawEffect}s act on the game through a
  * {@link kittens.api.GameContext}, and it takes part in setup through {@link kittens.api.GameSetup}.
- * Still to come: rule hooks, RandomSource, Timer and GameConfig.
+ * Playing: a {@link kittens.api.Combo} plays several cards together and a {@link kittens.api.Reaction}, such as Nope,
+ * can cancel a {@link kittens.api.PlayedAction}; both are supplied by an expansion.
+ * Still to come: rule hooks for turn order and drawing, RandomSource and GameConfig.
  */
 package kittens.api;

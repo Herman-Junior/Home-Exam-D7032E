@@ -1,6 +1,8 @@
 package kittens.testing;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -9,6 +11,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import kittens.api.Answer;
+import kittens.api.CardDefinition;
 import kittens.api.CardType;
 import kittens.api.Decision;
 import kittens.api.GameContext;
@@ -23,7 +27,8 @@ import kittens.api.PlayerPort;
  * <p>
  * It is deterministic: {@link #shuffleDeck()} only counts the shuffles, and {@link #stealRandomCard} always takes
  * the first card of the hand. Answers to {@link #ask} come from the {@link PlayerPort} registered for the player,
- * usually a {@link ScriptedPlayer}.
+ * usually a {@link ScriptedPlayer}. {@link #askAll} asks the registered players in the order given, and a player
+ * without a registered port counts as one who did not answer in time.
  */
 public final class FakeGameContext implements GameContext {
 
@@ -40,6 +45,7 @@ public final class FakeGameContext implements GameContext {
     private final Set<PlayerId> eliminated = new LinkedHashSet<>();
     private final List<GameEvent> announced = new ArrayList<>();
     private final List<Attack> attacks = new ArrayList<>();
+    private final Map<CardType, CardDefinition> definitions = new HashMap<>();
     private PlayerId current;
     private int turnsEnded;
     private int shuffles;
@@ -69,6 +75,13 @@ public final class FakeGameContext implements GameContext {
 
     public FakeGameContext withPlayer(int player, PlayerPort port) {
         ports.put(new PlayerId(player), port);
+        return this;
+    }
+
+    public FakeGameContext withDefinitions(CardDefinition... cards) {
+        for (CardDefinition card : cards) {
+            definitions.put(card.type(), card);
+        }
         return this;
     }
 
@@ -124,6 +137,22 @@ public final class FakeGameContext implements GameContext {
             throw new AssertionError("player " + player + " answered " + choice + " to " + decision);
         }
         return choice;
+    }
+
+    @Override
+    public List<Answer> askAll(Collection<PlayerId> players, Decision decision, Duration limit) {
+        List<Answer> answers = new ArrayList<>();
+        for (PlayerId player : players) {
+            if (ports.containsKey(player)) {
+                answers.add(new Answer(player, ask(player, decision)));
+            }
+        }
+        return answers;
+    }
+
+    @Override
+    public Optional<CardDefinition> definition(CardType type) {
+        return Optional.ofNullable(definitions.get(type));
     }
 
     @Override

@@ -51,4 +51,22 @@ class CardDefinitionTest {
         assertThrows(IllegalArgumentException.class, () -> new CardType(" "));
         assertThrows(IllegalArgumentException.class, () -> new PlayerId(-1));
     }
+
+    @Test
+    void tagsAndWildcardsAreKeptOnACopy() {
+        CardDefinition taco = CardDefinition.passive(new CardType("taco-cat")).withTag("cat");
+        CardDefinition feral = CardDefinition.passive(new CardType("feral-cat")).asWildcardFor("cat");
+        assertEquals(java.util.Set.of("cat"), taco.tags());
+        assertTrue(taco.wildcardFor().isEmpty());
+        assertEquals(java.util.Optional.of("cat"), feral.wildcardFor());
+        assertTrue(feral.tags().isEmpty());
+        assertEquals(java.util.Set.of("cat"), taco.notNopeable().tags());
+    }
+
+    @Test
+    void aBlankTagIsRefused() {
+        CardDefinition card = CardDefinition.passive(SKIP);
+        assertThrows(IllegalArgumentException.class, () -> card.withTag(" "));
+        assertThrows(IllegalArgumentException.class, () -> card.asWildcardFor(""));
+    }
 }
