@@ -4,19 +4,29 @@ Re-engineering of DevCat's single-file `ExplodingKittens.java`.
 
 ## Requirements
 
-- JDK 17 or newer (`java -version`). Maven is **not** needed: the Maven wrapper downloads it on first use.
+- JDK 17 or newer (check with `java -version`). The code is compiled for Java 17 and also runs on newer JDKs.
+- Maven is **not** needed to be installed: the Maven wrapper (`mvnw`) downloads it on first use, so the first run needs an
+  internet connection. Later runs work offline.
+- Use `./mvnw` on Linux and macOS, and `mvnw.cmd` on Windows.
 
-## Build, test, run
+## Compile, test, run
 
-From the repository root (use `mvnw.cmd` instead of `./mvnw` on Windows):
+All commands are given from the repository root.
 
 | Task | Command |
 |------|---------|
-| Run all unit tests (JUnit 5, prints pass/fail per test) | `./mvnw test` |
-| Build the runnable jar (also runs the tests) | `./mvnw package` |
+| Compile only | `./mvnw compile` |
+| Run all unit tests (JUnit 5, prints the result per test class) | `./mvnw test` |
+| Build the runnable jar (compiles and runs the tests) | `./mvnw package` |
+| Build the jar without the tests | `./mvnw package -DskipTests` |
+| Start from a clean state | `./mvnw clean package` |
 | Play a local game against computer players | `java -jar target/exploding-kittens.jar 1 2` (1 human, 2 bots) |
 | Host a game for other people | `java -jar target/exploding-kittens.jar 3 1` (3 humans, 1 bot: you and two who join) |
 | Join a hosted game | `java -jar target/exploding-kittens.jar 192.168.1.20` (the host's address; add `:port` for another port) |
+
+`./mvnw package` creates `target/exploding-kittens.jar`. A successful run of `./mvnw test` ends with
+`Tests run: 244, Failures: 0, Errors: 0` in total and `BUILD SUCCESS`. The report of each test class is written to
+`target/surefire-reports/`.
 
 ### Tests of the original code (Question 1)
 
@@ -24,11 +34,20 @@ From the repository root (use `mvnw.cmd` instead of `./mvnw` on Windows):
 ./mvnw -f legacy/pom.xml test
 ```
 
-Several of these tests are **expected to fail**: each failure shows a requirement the original code does not fulfil
-(see the comments in `legacy/src/test/java/ExplodingKittensLegacyTest.java`). The build still ends green so the summary is readable;
-add `-Dmaven.test.failure.ignore=false` to make failures fatal. They are not run by the root `./mvnw test`.
+These tests are run against the original, unchanged `ExplodingKittens.java`. 7 of the 9 tests are **expected to fail**: each
+failure shows a requirement that the original code does not fulfil (see the comments in
+`legacy/src/test/java/ExplodingKittensLegacyTest.java`). The build still ends green so that the summary can be read; add
+`-Dmaven.test.failure.ignore=false` to make a failing test stop the build. These tests are not part of the root
+`./mvnw test`.
 
-Test reports are written to `target/surefire-reports/`.
+### Troubleshooting
+
+- `release version 17 not supported` or `invalid target release`: the JDK is older than 17. Install JDK 17 or newer and make
+  sure `JAVA_HOME` points to it.
+- `mvnw: Permission denied` (Linux and macOS): run `chmod +x mvnw`.
+- The first build fails to download Maven or the plug-ins: check the internet connection or the proxy settings.
+- `Address already in use` when hosting: another program uses port 2048 (the host always listens on this port). Close that program and start again.
+- A client cannot connect: check the host's IP address and that the host's firewall allows TCP port 2048.
 
 ### Playing
 
