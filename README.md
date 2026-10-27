@@ -86,7 +86,4 @@ src/test/java/kittens/   JUnit tests
 
 The package structure follows the architecture design for Question 2.
 
-## Hand-in
 
-Canvas wants one archive containing a folder named after your LTU username, with the report PDF and the code.
-Leave out `target/`.
